@@ -6,15 +6,16 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      dimension: 3,
+      dimension: 2,
       padding: 25,
       innerPadding: 1,
       width: 100,
       height: 100,
       lines: 50,
-      density: 2,
+      density: 3,
       backgroundColor: "#fff",
       lineColor: "#111",
+      shapeLineColor: "red",
       lineWidth: 0.002
     }
   }
@@ -33,6 +34,7 @@ class App extends Component {
       bgLines.push(
         <line key={lineIndex} x1={0} y1={yValue}
               x2={this.state.dimension + 1} y2={yValue}
+              strokeLinecap="round"
               strokeWidth={this.state.lineWidth}  stroke={this.state.lineColor} />
       )
     }
@@ -64,7 +66,8 @@ class App extends Component {
           <line key={innerLineIndex}
               x1={x} y1={yValue}
               x2={x+1} y2={yValue}
-              strokeWidth={this.state.lineWidth}  stroke={this.state.lineColor} />
+              strokeLinecap="round"
+              strokeWidth={this.state.lineWidth * 2}  stroke={this.state.shapeLineColor} />
         )
       }
 
@@ -115,6 +118,7 @@ class App extends Component {
   handleKeydown (ev) {
     if (ev.which === 67) {
       ev.preventDefault()
+      this.setState({dimension: 2, lines: 1})
     } else if (ev.which === 82 && !(ev.metaKey || ev.ctrlKey)) {
       ev.preventDefault()
       this.forceUpdate()
