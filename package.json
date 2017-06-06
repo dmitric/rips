@@ -2,6 +2,7 @@
   "name": "rips",
   "version": "0.1.0",
   "private": true,
+  "homepage" : "http://dmitric.github.io/rips",
   "dependencies": {
     "hammerjs": "^2.0.8",
     "react": "^15.5.4",
