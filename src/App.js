@@ -108,6 +108,8 @@ class App extends Component {
 
     mc.on("swipedown", ev => this.increaseDimension())
       .on("swipeup", ev => this.decreaseDimension())
+      .on("swipeleft", ev => this.addLines())
+      .on("swiperight", ev => this.removeLines())
   }
 
   componentWillUnmount () {
