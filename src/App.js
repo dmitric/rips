@@ -117,10 +117,25 @@ class App extends Component {
     window.removeEventListener('keydown', this.handleKeydown.bind(this), true)
   }
 
+  handleSave () {
+    const svgData = document.getElementsByTagName('svg')[0].outerHTML   
+    const link = document.createElement('a')
+    
+    var svgBlob = new Blob([svgData], { type:"image/svg+xml;charset=utf-8" })
+    var svgURL = URL.createObjectURL(svgBlob)
+    link.href = svgURL 
+
+    link.setAttribute('download', `rips.svg`)
+    link.click()
+  }
+
   handleKeydown (ev) {
     if (ev.which === 67) {
       ev.preventDefault()
       this.setState({dimension: 2, lines: 1})
+    } else if (ev.which === 83 && (ev.metaKey || ev.ctrlKey)) {
+      ev.preventDefault()
+      this.handleSave()
     } else if (ev.which === 82 && !(ev.metaKey || ev.ctrlKey)) {
       ev.preventDefault()
       this.forceUpdate()
