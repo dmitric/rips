@@ -157,17 +157,51 @@ class App extends Component {
       this.forceUpdate()
     } else if (ev.which === 37) {
       ev.preventDefault()
-      this.removeLines()
+      if (ev.metaKey || ev.ctrlKey) {
+        this.decreaseLineWidth()
+      } else {
+        this.removeLines()
+      }
     } else if (ev.which === 39) {
       ev.preventDefault()
-      this.addLines()
+
+      if (ev.metaKey || ev.ctrlKey) {
+        this.increaseLineWidth()
+      } else {
+        this.addLines()
+      }
     } else if (ev.which === 40) {
       ev.preventDefault()
-      this.decreaseDimension()
+
+      if (ev.metaKey || ev.ctrlKey) {
+        this.decreaseDensity()
+      } else {
+        this.decreaseDimension()
+      }
     } else if (ev.which === 38) {
       ev.preventDefault()
-      this.increaseDimension()
+      if (ev.metaKey || ev.ctrlKey) {
+        this.increaseDensity()
+      } else {
+        this.increaseDimension()
+      }
     }
+  }
+
+  increaseLineWidth () {
+    this.setState({lineWidth: Math.min(this.state.lineWidth + 0.002, 0.01) })
+  }
+
+  decreaseLineWidth () {
+    this.setState({lineWidth: Math.max(this.state.lineWidth - 0.002, 0.002) })
+  }
+
+  increaseDensity () {
+    this.setState({density: Math.min(this.state.density + 1, 5) })
+  }
+
+  decreaseDensity () {
+    this.setState({density: Math.max(this.state.density - 1, 1) })
   }
 
   addLines () {
